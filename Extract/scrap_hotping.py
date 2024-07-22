@@ -1,5 +1,3 @@
-## 크롤링해야하는 카테고리별 링크 dict
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
