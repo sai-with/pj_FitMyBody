@@ -28,9 +28,10 @@ try:
         # 5페이지씩만 크롤링 (총 300개)
         page_box = driver.find_element(By.CLASS_NAME, 'ec-base-paginate')
         page = page_box.find_element(By.TAG_NAME, 'ol')
-        pages = page.find_elements(By.TAG_NAME, 'a')
+        page_a = page.find_elements(By.TAG_NAME, 'a')
+        pages = [p.get_attribute('href') for p in page_a]
         for p in pages: # 페이지별로 크롤링
-            driver.get(p.get_attribute('href'))
+            driver.get(p)
             time.sleep(3) # 대기
             product_box = driver.find_element(By.CLASS_NAME,'xans-product-listnormal')
             products = product_box.find_elements(By.CLASS_NAME, 'box')
@@ -38,7 +39,7 @@ try:
                 link = product.find_element(By.TAG_NAME, 'a').get_attribute('href') # 상품링크
                 img = product.find_element(By.TAG_NAME, 'img').get_attribute('src') # 이미지
                 name = product.find_element(By.CLASS_NAME, 'name')
-                item = name.find_element(By.TAG_NAME, 'strong').text
+                item = name.find_element(By.TAG_NAME, 'a').text
                 lis = product.find_elements(By.TAG_NAME, 'li')
                 if len(lis) == 4:
                     price = lis[1].text
@@ -49,7 +50,7 @@ try:
                 price = int(price)
                 items.append({
                     'cat': cat,
-                    'name': name,
+                    'name': item,
                     'img': img,
                     'price': price,
                     'link': link
