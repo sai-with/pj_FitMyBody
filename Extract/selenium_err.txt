@@ -1,0 +1,6 @@
+OSError: [Errno 8] Exec format error
+1. webdriver-manager 재설치 - X
+2. bash 창에 #!/bin/sh 입력 - X
+3. chrome 업데이트 - X
+4. 경로를 mac64에서 mac_arm64로 변경(M1) (drivermanager 대신 직접 다운로드) - X 방화벽 차단
+5. xattr -d com.apple.quarantine 드라이버 경로 - 

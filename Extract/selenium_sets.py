@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+# from webdriver_manager.chrome import ChromeDriverManager
 
 def driver():
     ## Chrome Options
@@ -14,6 +14,5 @@ def driver():
     chrome_options.add_argument("--start-maximized")
 
     ## driver 설정
-    auto_driver = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=auto_driver, options=chrome_options)
+    driver = webdriver.Chrome('./chromedriver', options=chrome_options)
     return driver
