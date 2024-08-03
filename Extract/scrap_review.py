@@ -15,7 +15,8 @@ driver = driver()
 
 # link 가져오기 
 '''
-08/02 idx:23 '''
+08/02 idx:23
+08/03 idx:100'''
 items_link = pd.read_json('./items_link.json')
 
 ## 크롤링
@@ -44,8 +45,7 @@ def get_value(item_id, n_review, review_list):
                 star = int(star) # 정수 변환
                 info_dict['별점'] = star # 별점 입력
                 
-                comments = left.find_element(By.CLASS_NAME, 'review_list_v2__message').text
-                comment = comments.strip('\n') # 줄바꿈 제거
+                comment = left.find_element(By.CLASS_NAME, 'review_list_v2__message').text
                 info_dict['리뷰'] = comment # 리뷰 입력
                 
                 user_id = right.find_element(By.TAG_NAME, 'b').text
@@ -110,6 +110,6 @@ def scrap(data):
         print(review_list[-1])
         print('수집한 데이터\n', len(review_list))
         print(traceback.format_exc()) # 오류 메시지 출력
-scrap(items_link.iloc[24:50])
+scrap(items_link.iloc[101:200])
 
     
