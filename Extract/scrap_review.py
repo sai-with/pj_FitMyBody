@@ -16,7 +16,8 @@ driver = driver()
 # link 가져오기 
 '''
 08/02 idx:23
-08/03 idx:100'''
+08/03 idx:100
+08/04 idx:151'''
 items_link = pd.read_json('./items_link.json')
 
 ## 크롤링
@@ -72,7 +73,7 @@ def get_value(item_id, n_review, review_list):
             review_list = get_detail()
             if n_review > 0: # 남은 페이지가 있으면
                 button.click() # 다음 페이지 이동
-                time.sleep(2) # 대기
+                time.sleep(3) # 대기
         
     return review_list
 
@@ -110,6 +111,6 @@ def scrap(data):
         print(review_list[-1])
         print('수집한 데이터\n', len(review_list))
         print(traceback.format_exc()) # 오류 메시지 출력
-scrap(items_link.iloc[101:200])
+scrap(items_link.iloc[152:200])
 
     
