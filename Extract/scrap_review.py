@@ -17,7 +17,8 @@ driver = driver()
 '''
 08/02 idx:23
 08/03 idx:100
-08/04 idx:151'''
+08/04 idx:151
+08/05 idx:299'''
 items_link = pd.read_json('./items_link.json')
 
 ## 크롤링
@@ -87,19 +88,22 @@ def scrap(data):
             driver.get(url) # 리뷰 페이지 접속
             time.sleep(3) # 대기
             # 리뷰 버튼
-            review_bar = driver.find_element(By.CLASS_NAME,'menu')
-            
-            # 페이징을 위해 리뷰 개수 파악하기
-            n_review = review_bar.find_element(By.TAG_NAME, 'span').text
-            n_review = n_review.strip('()') # ex) (1,225)
-            n_review = n_review.replace(',', '')
-            n_review = int(n_review)
-            if n_review == 0: # 리뷰없으면
+            try: # 현재 없는 상품은 홈으로 연결돼서 오류 발생
+                review_bar = driver.find_element(By.CLASS_NAME,'menu')
+                # 페이징을 위해 리뷰 개수 파악하기
+                n_review = review_bar.find_element(By.TAG_NAME, 'span').text
+                n_review = n_review.strip('()') # ex) (1,225)
+                n_review = n_review.replace(',', '')
+                n_review = int(n_review)
+                if n_review == 0: # 리뷰없으면
+                    pass
+                # iframe 접근(리뷰창)
+                iframe = driver.find_element(By.ID, 'crema-product-reviews-3')
+                driver.switch_to.frame(iframe) # 리뷰 iframe으로 이동
+                review_list = get_value(item_id, n_review, review_list)
+            except:
                 pass
-            # iframe 접근(리뷰창)
-            iframe = driver.find_element(By.ID, 'crema-product-reviews-3')
-            driver.switch_to.frame(iframe) # 리뷰 iframe으로 이동
-            review_list = get_value(item_id, n_review, review_list)
+            
             
         driver.quit() # 브라우저 종료
         print('수집한 리뷰 개수: ', len(review_list)) # 수집한 리뷰 개수
@@ -113,6 +117,7 @@ def scrap(data):
         print(review_list[-1])
         print('수집한 데이터\n', len(review_list))
         print(traceback.format_exc()) # 오류 메시지 출력
-scrap(items_link.iloc[225:300])
+        
+scrap(items_link.iloc[278:300])
 
     
