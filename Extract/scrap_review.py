@@ -66,12 +66,14 @@ def get_value(item_id, n_review, review_list):
     if n_review <= 5: # 페이징 불필요
         review_list = get_detail()
     elif n_review > 5: # 페이징 필요
+        paging = 0 # 페이징 횟수
         while n_review > 0: 
             # 페이징 버튼
             button = driver.find_element(By.CLASS_NAME, 'pagination__button--next')
             n_review -= 5
             review_list = get_detail()
-            if n_review > 0: # 남은 페이지가 있으면
+            if n_review > 0 and paging < 800: # 남은 페이지가 있으면
+                paging += 1 
                 button.click() # 다음 페이지 이동
                 time.sleep(3) # 대기
         
@@ -111,6 +113,6 @@ def scrap(data):
         print(review_list[-1])
         print('수집한 데이터\n', len(review_list))
         print(traceback.format_exc()) # 오류 메시지 출력
-scrap(items_link.iloc[152:200])
+scrap(items_link.iloc[225:300])
 
     

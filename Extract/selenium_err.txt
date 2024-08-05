@@ -4,3 +4,7 @@ OSError: [Errno 8] Exec format error
 3. chrome 업데이트 - X
 4. 경로를 mac64에서 mac_arm64로 변경(M1) (drivermanager 대신 직접 다운로드) - X 방화벽 차단
 5. xattr -d com.apple.quarantine 드라이버 경로 - 
+
+unknown error: session deleted because of page crash
+: 메모리 누수로 인한 에러로 지속적인 페이지 넘김 / 탭이 너무 많은 경우 발생 - 현재 상황은 페이지 넘김으로 인한 에러
+1. 주기적으로 재실행하기 -  페이지 넘김 횟수 800 초과시 (리뷰 4천개) 다음 상품으로 넘김
