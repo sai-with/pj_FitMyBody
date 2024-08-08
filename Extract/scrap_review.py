@@ -18,7 +18,9 @@ driver = driver()
 08/02 idx:23
 08/03 idx:100
 08/04 idx:151
-08/05 idx:299'''
+08/05 idx:299
+08/08 idx418:
+'''
 items_link = pd.read_json('./items_link.json')
 
 ## 크롤링
@@ -118,6 +120,6 @@ def scrap(data):
         print('수집한 데이터\n', len(review_list))
         print(traceback.format_exc()) # 오류 메시지 출력
         
-scrap(items_link.iloc[278:300])
+scrap(items_link.iloc[419:430])
 
     
