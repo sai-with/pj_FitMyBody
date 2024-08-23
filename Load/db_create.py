@@ -6,7 +6,6 @@ cur = conn.cursor()
 cur.execute("DROP TABLE IF EXISTS item;")
 cur.execute("DROP TABLE IF EXISTS user;")
 cur.execute("DROP TABLE IF EXISTS review;")
-cur.execute("DROP TABLE IF EXISTS size;")
 
 cur.execute('''
             CREATE TABLE item(
@@ -40,12 +39,6 @@ cur.execute('''
                 FOREIGN KEY(user_id) REFERENCES user(id),
                 FOREIGN KEY(item_id) REFERENCES item(id),
                 FOREIGN KEY(size_id) REFERENCES size(id));''')
-
-cur.execute('''
-            CREATE TABLE size(
-                id VARCHAR(1) NOT NULL,
-                size VARCHAR(5));
-            ''')
 conn.commit()
 cur.close()
 conn.close()
